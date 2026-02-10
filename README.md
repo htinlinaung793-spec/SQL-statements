@@ -247,6 +247,3 @@ FROM customer
 
 
 
-
-
-
