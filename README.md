@@ -8,6 +8,7 @@ Skills: Filtering, Aggregations, Pattern Matching, Date Handling
 
 -- 1. Full customer contact list for email campaign
 -- Purpose: Extracting active emails for marketing reach-out
+```sql
 SELECT 
     first_name, 
     last_name, 
@@ -21,4 +22,5 @@ SELECT
 ORDER BY 
     last_name DESC, 
     first_name DESC;
+```
 
