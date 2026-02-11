@@ -48,21 +48,46 @@ erDiagram
     ADDRESS ||--o{ CUSTOMER : "located_at"
 
     CUSTOMER {
-        int customer_id PK
-        string first_name
-        string last_name
-        string email
-    }
-    PAYMENT {
-        int payment_id PK
-        decimal amount
-        datetime payment_date
-    }
-    FILM {
-        int film_id PK
-        string title
-        decimal replacement_cost
-    }
+    int customer_id PK
+    string first_name
+    string last_name
+    string email
+    int address_id FK
+}
+
+RENTAL {
+    int rental_id PK
+    datetime rental_date
+    int inventory_id FK
+    int customer_id FK
+}
+
+PAYMENT {
+    int payment_id PK
+    int customer_id FK
+    int staff_id FK
+    int rental_id FK
+    decimal amount
+    datetime payment_date
+}
+
+FILM {
+    int film_id PK
+    string title
+    string description
+    decimal replacement_cost
+}
+
+STAFF {
+    int staff_id PK
+    string first_name
+    string last_name
+}
+
+ADDRESS {
+    int address_id PK
+    string district
+}
 ```
 
 ```sql
