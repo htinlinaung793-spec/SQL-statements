@@ -34,7 +34,7 @@ Data Cleaning: String manipulation (CONCAT, LENGTH, SUBSTRING), NULL handling
 
 Logic: GROUP BY, ORDER BY, LIMIT
 
-```mermaid erDiagram CUSTOMER ||--o{ RENTAL : "places" CUSTOMER ||--o{ PAYMENT : "makes" RENTAL ||--o{ PAYMENT : "generates" INVENTORY ||--o{ RENTAL : "is_rented" FILM ||--o{ INVENTORY : "stores" STAFF ||--o{ PAYMENT : "processes" STAFF ||--o{ RENTAL : "handles" ADDRESS ||--o{ CUSTOMER : "located_at"
+```mermaid
 
 CUSTOMER {
     int customer_id PK
