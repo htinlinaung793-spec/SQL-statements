@@ -1,7 +1,10 @@
+/*
+===============================================================================
 --DVD Rental Database Analysis
 --Author: Htin Linn Aung
---Skills: Filtering, Aggregations, Pattern Matching, Date Handling
-************************************************************/
+--Description: Analyzing financial metrics, staff performance, and text-based data cleaning.
+===============================================================================
+*/
 
 SQL Portfolio: DVD Rental Business Intelligence 📀
 An end-to-end analysis of customer behavior, inventory management, and financial performance using PostgreSQL.
@@ -296,4 +299,25 @@ SELECT
     POSITION('.' IN email) AS dot_position
 FROM customer;
 ```
+
+📈 Key Insights & Business Recommendations
+After executing the analysis, several key trends and operational opportunities were identified:
+
+1. Financial Performance
+Revenue Concentration: A significant portion of revenue is driven by a specific set of price points ($4.99–$9.99). The business should consider "bundle" promotions for lower-tier films (under $2) to increase transaction volume.
+
+Peak Activity: Daily sales audits (Query 21) identified specific high-traffic dates. These should be cross-referenced with marketing calendars to measure the ROI of seasonal campaigns.
+
+2. Customer Engagement
+Geographic Reach: The customer base is spread across various districts (Query 4). Districts with low customer counts represent untapped markets for localized social media advertisements.
+
+Retention Opportunity: Our "Active Rental" audit (Query 11) flagged several outstanding films. Implementing an automated email reminder for these customers could improve inventory turnover.
+
+3. Inventory & Content Strategy
+Catalog Diversity: While the "Saga" and "Documentary" genres are well-represented (Query 15 & 16), the replacement cost analysis (Query 19) shows an average value of ~$20 per film. This high replacement cost justifies a strict late-fee or insurance policy for high-value titles.
+
+4. Data Quality & Health
+Data Integrity: The audit for missing first names (Query 10) returned a clean result, indicating high health for the customer registration process.
+
+System Standardization: Email analysis (Query 23) identified several outliers in length, suggesting that future UI updates to the customer portal should ensure flexible field widths to avoid truncation.
 
