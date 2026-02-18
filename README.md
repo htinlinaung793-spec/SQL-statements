@@ -361,7 +361,7 @@ FROM customer;
 
 -- 26. Rental-to-Replacement Yield Analysis
 -- Purpose: Identify films where the rental rate is less than 4% of the replacement cost 
--- to evaluate ROI and identify potential underpriced inventory.
+--          to evaluate ROI and identify potential underpriced inventory.
 WITH yield_calc AS (
     SELECT
         film_id,
@@ -377,7 +377,7 @@ ORDER BY yield_percentage ASC;
 
 -- 27. Content Tier Classification
 -- Purpose: Categorize the library into tiers based on duration, rating, and genre 
--- for targeted marketing campaigns and library segmentation.
+--          for targeted marketing campaigns and library segmentation.
 SELECT
     title,
     CASE 
@@ -391,7 +391,7 @@ FROM film;
 
 -- 28. Customer Transaction Mapping
 -- Purpose: Link individual payments to customer profiles to identify which users 
--- are driving revenue and track transaction dates.
+--          are driving revenue and track transaction dates.
 SELECT
     p.payment_id,
     p.amount,
@@ -404,7 +404,7 @@ ORDER BY p.payment_date DESC;
 
 -- 29. Comprehensive Customer-Payment Audit
 -- Purpose: Audit the entire database to capture all customers and their associated 
--- payments, ensuring no data is orphaned during financial reconciliation.
+--          payments, ensuring no data is orphaned during financial reconciliation.
 SELECT
     c.customer_id,
     c.first_name,
@@ -417,7 +417,7 @@ ORDER BY c.customer_id;
 
 -- 30. Film Genre Mapping
 -- Purpose: Assign a category name to every film in the inventory by navigating the 
--- many-to-many relationship via the bridge table (film_category).
+--          many-to-many relationship via the bridge table (film_category).
 SELECT
 	f.film_id,
 	f.title,
