@@ -34,6 +34,8 @@ Data Cleaning: String manipulation (CONCAT, LENGTH, SUBSTRING), NULL handling
 
 Logic: GROUP BY, ORDER BY, LIMIT
 
+Intermediate Functions : Mathematical Operators, CASE/END, JOIN
+
 ## 📊 Database Schema (ERD)
 This diagram illustrates the relational structure of the data analyzed in this project.
 
@@ -356,6 +358,74 @@ SELECT
     SUBSTRING(email FROM '\.') AS extracted_dot,
     POSITION('.' IN email) AS dot_position
 FROM customer;
+
+-- 26. Rental-to-Replacement Yield Analysis
+-- Purpose: Identify films where the rental rate is less than 4% of the replacement cost 
+-- to evaluate ROI and identify potential underpriced inventory.
+WITH yield_calc AS (
+    SELECT
+        film_id,
+        rental_rate,
+        replacement_cost,
+        ROUND((rental_rate / replacement_cost) * 100, 2) AS yield_percentage
+    FROM film
+)
+SELECT *
+FROM yield_calc
+WHERE yield_percentage < 4
+ORDER BY yield_percentage ASC;
+
+-- 27. Content Tier Classification
+-- Purpose: Categorize the library into tiers based on duration, rating, and genre 
+-- for targeted marketing campaigns and library segmentation.
+SELECT
+    title,
+    CASE 
+        WHEN rating IN ('PG', 'PG-13') OR length > 210 THEN 'Tier 1: Premium/Long'
+        WHEN description ILIKE '%Drama%' AND length > 90 THEN 'Tier 2: Standard Drama'
+        WHEN description ILIKE '%Drama%' THEN 'Tier 3: Short Drama'
+        WHEN rental_rate < 1 THEN 'Tier 4: Budget'
+        ELSE 'General'
+    END AS tier_list
+FROM film;
+
+-- 28. Customer Transaction Mapping
+-- Purpose: Link individual payments to customer profiles to identify which users 
+-- are driving revenue and track transaction dates.
+SELECT
+    p.payment_id,
+    p.amount,
+    p.payment_date,
+    c.first_name,
+    c.last_name
+FROM payment p
+INNER JOIN customer c ON p.customer_id = c.customer_id
+ORDER BY p.payment_date DESC;
+
+-- 29. Comprehensive Customer-Payment Audit
+-- Purpose: Audit the entire database to capture all customers and their associated 
+-- payments, ensuring no data is orphaned during financial reconciliation.
+SELECT
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    p.payment_id,
+    p.amount
+FROM customer c
+FULL OUTER JOIN payment p ON c.customer_id = p.customer_id
+ORDER BY c.customer_id;
+
+-- 30. Film Genre Mapping
+-- Purpose: Assign a category name to every film in the inventory by navigating the 
+-- many-to-many relationship via the bridge table (film_category).
+SELECT
+	f.film_id,
+	f.title,
+	c.name
+FROM film f
+LEFT JOIN category c
+ON f.film_id = c.category_id
+ORDER BY f.title;
 ```
 
 📈 Key Insights & Business Recommendations
